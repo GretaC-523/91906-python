@@ -3,7 +3,7 @@ import random
 from list import kana_list
 
 # Importing the QuizScore class from quiz_score.py
-from quiz_score import display_score as QuizScore 
+from quiz_score import QuizScore 
 
 # Ask the user about the quiz type & if they want to see the lists/start the quiz
 def start_quiz():
