@@ -1,4 +1,5 @@
 import time
+
 # Hiragana and Katakana lists
 def kana_list():
  # Hiragana with romanji
@@ -50,4 +51,5 @@ def kana_list():
      ("ビャ", "bya"), ("ビュ", "byu"), ("ビョ", "byo"),
      ("ピャ", "pya"), ("ピュ", "pyu"), ("ピョ", "pyo")
  ]
- 
+
+kana_list() 

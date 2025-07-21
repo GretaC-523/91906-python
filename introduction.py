@@ -5,7 +5,7 @@ from datetime import datetime
 def display_date_time():
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    print(f"The current date & time is/今の日付と時刻は: {dt_string}")
+    print(f"The current date & time is(今の日付と時刻は): {dt_string}")
 
 # Welcome message & ask for the user's name
 display_date_time()
@@ -13,4 +13,4 @@ print("Hello, welcome to the Hiragana & Katakana game.こんにちは、ひら�
 name = input("(お名前は何ですか？)What is your name? ").strip()
 time.sleep(0.5)
 print("Hello,", name.title(), ".")
-print("こんにちは、" + name.title() + "さん。") 
+print("こんにちは、" + name.title() + "さん。")
