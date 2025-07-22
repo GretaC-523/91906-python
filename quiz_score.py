@@ -1,4 +1,5 @@
 import time
+from quiz import QuizScore
 
 # Class function to display the quiz score
 class QuizScore():

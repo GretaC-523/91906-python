@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import simpledialog
 from list import kana_list
-from quiz_score import display_score as QuizScore
+from quiz_score import QuizScore
 
 class KanaQuizGUI:
     def __init__(self, master):
