@@ -26,7 +26,7 @@ def kana_list():
         ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
     ]
 
-    print("Kana List with romaji:")
+    print("Kana List with romanji:")
     time.sleep(1)
     print(f"{'Romaji':<50} {'Hiragana':<50} {'Katakana':<50}")
     print("-" * 150)
