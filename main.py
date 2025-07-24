@@ -96,7 +96,6 @@ class Kana_quiz:
              time.sleep(1) 
      score.score_display()
 
-
 # Class function to display the quiz score
 class QuizScore():
     def __init__(self, correct_answers, total_questions):
