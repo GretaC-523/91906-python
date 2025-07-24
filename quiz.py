@@ -12,6 +12,8 @@ def start_quiz():
      list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
      if list_choice == 'yes' or list_choice == 'y':
          kana_list()
+         print("Good luck with your revision! 復習を頑張ります！") 
+
      elif list_choice == 'no' or list_choice == 'n':
          print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
          print("Good luck! 頑張ります！") 
