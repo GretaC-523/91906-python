@@ -1,22 +1,20 @@
 import time
 import random
 from list import kana_list
-
-# Importing the QuizScore class from quiz_score.py
-from quiz_score import QuizScore 
+from quiz_score import QuizScore
 
 # Ask the user about the quiz type & if they want to see the lists/start the quiz
 def start_quiz():
- start = input("Do you want to start the quiz now/need some more time? (yes/no): ").strip().lower()
- if start == 'yes' or start == 'y':
+ start = input("Do you want to start the quiz now/need some more time? (start/not yet): ").strip().lower()
+ if start == 'start':
      Kana_quiz()
- else:
-     list_choice = input("Do you want to see the Hiragana & Katakana lists? (yes/no): ").strip().lower()
+ elif start == 'not yet': 
+     list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
      if list_choice == 'yes' or list_choice == 'y':
-         quiz.kana_list()
+         kana_list()
      elif list_choice == 'no' or list_choice == 'n':
          print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
-         print("Good luck! 頑張ります！")
+         print("Good luck! 頑張ります！") 
 
 # Class function of the Kana quiz
 class Kana_quiz: 
@@ -34,7 +32,7 @@ class Kana_quiz:
          else:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1)
-     score.display()
+     score.score_display()
 
     # Function of the Katakana quiz
     def katakana(self): 
@@ -61,7 +59,7 @@ if __name__ == "__main__":
      elif choice == '2':
          quiz.katakana()
      elif choice.lower() == 'exit':
-         print("This is the end of the quiz.")
+         print("This is the end of the quiz. このクイズは終わりました。")
          break
      else:
          print("Invalid choice. Please try again.")
