@@ -51,4 +51,3 @@ class Kana_quiz:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1) 
      score.score_display()
-
