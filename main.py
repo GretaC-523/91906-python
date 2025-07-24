@@ -49,21 +49,18 @@ def kana_list():
     for romaji, hira, kata in kana_romanji:
         print(f"{romaji:<50} {hira:<50} {kata:<50}")
 
-if __name__ == "__main__":
-    kana_list()
-
 # Ask the user about the quiz type & if they want to see the lists/start the quiz
 def start_quiz():
- start = input("Do you want to start the quiz now/need some more time? (yes/no): ").strip().lower()
- if start == 'yes' or start == 'y':
+ start = input("Do you want to start the quiz now/need some more time? (start/not yet): ").strip().lower()
+ if start == 'start':
      Kana_quiz()
- else:
-     list_choice = input("Do you want to see the Hiragana & Katakana lists? (yes/no): ").strip().lower()
+ elif start == 'not yet': 
+     list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
      if list_choice == 'yes' or list_choice == 'y':
          kana_list()
      elif list_choice == 'no' or list_choice == 'n':
          print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
-         print("Good luck! 頑張ります！")
+         print("Good luck! 頑張ります！") 
 
 # Class function of the Kana quiz
 class Kana_quiz: 
@@ -81,7 +78,7 @@ class Kana_quiz:
          else:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1)
-     score.display()
+     score.score_display()
 
     # Function of the Katakana quiz
     def katakana(self): 
@@ -97,21 +94,8 @@ class Kana_quiz:
          else:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1) 
-     score.display()  
-    
-if __name__ == "__main__":
- quiz = Kana_quiz()
- while True:
-     choice = input("Choose a quiz: 1 for Hiragana, 2 for Katakana, or 'exit' to quit: ")
-     if choice == '1':
-         quiz.hiragana()
-     elif choice == '2':
-         quiz.katakana()
-     elif choice.lower() == 'exit':
-         print("This is the end of the quiz.")
-         break
-     else:
-         print("Invalid choice. Please try again.")
+     score.score_display()
+
 
 # Class function to display the quiz score
 class QuizScore():

@@ -48,19 +48,5 @@ class Kana_quiz:
          else:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1) 
-     score.display()  
-    
-if __name__ == "__main__":
- quiz = Kana_quiz()
- while True:
-     choice = input("Choose a quiz: 1 for Hiragana, 2 for Katakana, or 'exit' to quit: ")
-     if choice == '1':
-         quiz.hiragana()
-     elif choice == '2':
-         quiz.katakana()
-     elif choice.lower() == 'exit':
-         print("This is the end of the quiz. このクイズは終わりました。")
-         break
-     else:
-         print("Invalid choice. Please try again.")
+     score.score_display()
 
