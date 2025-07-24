@@ -32,4 +32,3 @@ class QuizScore():
         elif score == 100:
             print("Congratulations! You answered all questions correctly.")
             print("おめでとうございます！ よくできました。")
-
