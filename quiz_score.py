@@ -1,5 +1,5 @@
 import time
-from quiz import QuizScore
+from quiz import Kana_quiz
 
 # Class function to display the quiz score
 class QuizScore():
@@ -7,11 +7,12 @@ class QuizScore():
         self.correct_answers = correct_answers
         self.total_questions = total_questions
 
-    def display(self):
+    def score_display(self):
         print(f"You have answered {self.correct_answers} out of {self.total_questions} questions correctly.")
         score = (self.correct_answers / self.total_questions) * 100
         print(f"Your quiz score is: {score}%")
         time.sleep(1)
+        print("Thank you for taking the quiz! Goodbye. クイズをしてくれてありがとうございました! さよなら。") 
 
         if score == 0:
             print("You did not answer any questions correctly. Please try again after revision.")
@@ -19,7 +20,7 @@ class QuizScore():
             return
 
         elif score < 50 and score > 0:
-            print("You answered less than half of the questions correctly. Please revise and try again.")
+            print("You answered less than half of the questions correctly. Please try again after revision.")
             print("Good luck for next time!")
             return
 
@@ -31,5 +32,3 @@ class QuizScore():
         elif score == 100:
             print("Congratulations! You answered all questions correctly.")
             print("おめでとうございます！ よくできました。")
-
-print("Thank you for taking the quiz! Goodbye! クイズをしてくれてありがとうございました! さよなら。")
