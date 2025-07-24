@@ -53,7 +53,8 @@ def kana_list():
 def start_quiz():
  start = input("Do you want to start the quiz now/need some more time? (start/not yet): ").strip().lower()
  if start == 'start':
-     Kana_quiz()
+     quiz = Kana_quiz
+     quiz.kana_quiz
  elif start == 'not yet': 
      list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
      if list_choice == 'yes' or list_choice == 'y':
@@ -64,10 +65,22 @@ def start_quiz():
          print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
          print("Good luck! 頑張ります！") 
 
-start_quiz()
-
 # Class function of the Kana quiz
 class Kana_quiz: 
+    # Asks the user to choose between Hiragana or Katakana quiz
+    def quiz_method(self):
+        choice = input("Which quiz would you like to take? (hiragana/katakana/both): ").strip().lower()
+        if choice == 'hiragana' or choice == 'ひらがな' or choice == '平仮名':
+            self.hiragana()
+        elif choice == 'katakana' or choice == 'カタカナ' or choice == '片仮名':
+            self.katakana()
+        elif choice == 'both':
+            self.hiragana()
+            self.katakana()
+        else:
+            print("Invalid choice. Please choose either 'hiragana' or 'katakana'.")
+            self.quiz_method()
+
     # Function of the Hiragana quiz  
     def hiragana(self):
      print("Starting Hiragana quiz...")
@@ -99,6 +112,8 @@ class Kana_quiz:
              print(f"Oops! The answer should be {answer}.")
              time.sleep(1) 
      score.score_display()
+
+start_quiz()
 
 # Class function to display the quiz score
 class QuizScore():
