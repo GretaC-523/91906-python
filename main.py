@@ -8,14 +8,6 @@ def display_date_time():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     print(f"The current date & time is(今の日付と時刻は): {dt_string}")
 
-# Welcome message & ask for the user's name
-display_date_time()
-print("Hello, welcome to the Hiragana & Katakana game.こんにちは、ひらがなとカタカナのゲームへようこそ。")
-name = input("(お名前は何ですか？)What is your name? ").strip()
-time.sleep(0.5)
-print("Hello,", name.title(), ".")
-print("こんにちは、" + name.title() + "さん。")
-
 # Hiragana and Katakana lists with romaji
 def kana_list():
     kana_romanji = [
@@ -42,109 +34,84 @@ def kana_list():
         ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
     ]
 
-    print("Kana List with romaji:")
-    time.sleep(1)
-    print(f"{'Romaji':<50} {'Hiragana':<50} {'Katakana':<50}")
-    print("-" * 150)
-    for romaji, hira, kata in kana_romanji:
-        print(f"{romaji:<50} {hira:<50} {kata:<50}")
+    hira_list = [(hira, romaji) for romaji, hira, kata in kana_romanji]
+    kata_list = [(kata, romaji) for romaji, hira, kata in kana_romanji]
+    return hira_list, kata_list
 
-# Ask the user about the quiz type & if they want to see the lists/start the quiz
-def start_quiz():
- start = input("Do you want to start the quiz now/need some more time? (start/not yet): ").strip().lower()
- if start == 'start':
-     quiz = Kana_quiz
-     quiz.kana_quiz
- elif start == 'not yet': 
-     list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
-     if list_choice == 'yes' or list_choice == 'y':
-         kana_list()
-         print("Good luck with your revision! 復習を頑張ります！") 
-
-     elif list_choice == 'no' or list_choice == 'n':
-         print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
-         print("Good luck! 頑張ります！") 
+# Function to display the Kana lists
+def list_display():
+    hira_list, kata_list = kana_list()
+    print(f"{'Romaji':<10} {'Hiragana':<10} {'Katakana':<10}")
+    print("-" * 30)
+    for hira, romaji in hira_list:
+        kata = next((k for k, r in kata_list if r == romaji), "")
+        print(f"{romaji:<10} {hira:<10} {kata:<10}")
 
 # Class function of the Kana quiz
 class Kana_quiz: 
+    def __init__(self):
+        self.hira_list, self.kata_list = kana_list()
+
     # Asks the user to choose between Hiragana or Katakana quiz
-    def quiz_method(self):
+    def quiz_choice(self):
         choice = input("Which quiz would you like to take? (hiragana/katakana/both): ").strip().lower()
-        if choice == 'hiragana' or choice == 'ひらがな' or choice == '平仮名':
-            self.hiragana()
-        elif choice == 'katakana' or choice == 'カタカナ' or choice == '片仮名':
-            self.katakana()
+        if choice in ['hiragana', 'ひらがな', '平仮名']:
+            self.run_quiz(self.hira_list, "Hiragana")
+        elif choice in ['katakana', 'カタカナ', '片仮名']:
+            self.run_quiz(self.kata_list, "Katakana")
         elif choice == 'both':
-            self.hiragana()
-            self.katakana()
+            self.run_quiz(self.hira_list, "Hiragana")
+            self.run_quiz(self.kata_list, "Katakana")
         else:
-            print("Invalid choice. Please choose either 'hiragana' or 'katakana'.")
-            self.quiz_method()
+            print("Please enter either 'hiragana', 'katakana', or 'both'.")
+            self.start()
 
-    # Function of the Hiragana quiz  
-    def hiragana(self):
-     print("Starting Hiragana quiz...")
-     time.sleep(1) 
-     score = QuizScore(0, 10)
-     questions = random.sample(kana_list()[0], 10)  # Randomly select 10 Hiragana
-     for question, answer in questions:
-         user_answer = input(f"What is the romanji for {question}? ")
-         if user_answer.lower() == answer:
-             score += 10
-             print("Correct!")
-         else:
-             print(f"Oops! The answer should be {answer}.")
-             time.sleep(1)
-     score.score_display()
-
-    # Function of the Katakana quiz
-    def katakana(self): 
-     print("Starting Katakana quiz...")
-     time.sleep(1)
-     score = QuizScore(0, 10)
-     questions = random.sample(kana_list()[1], 10)  # Randomly select 10 Katakana
-     for question, answer in questions:
-         user_answer = input(f"What is the romanji for {question}? ")
-         if user_answer.lower() == answer:
-             score += 10
-             print("Correct!")
-         else:
-             print(f"Oops! The answer should be {answer}.")
-             time.sleep(1) 
-     score.score_display()
-
-start_quiz()
-
-# Class function to display the quiz score
-class QuizScore():
-    def __init__(self, correct_answers, total_questions):
-        self.correct_answers = correct_answers
-        self.total_questions = total_questions
-
-    def display(self):
-        print(f"You have answered {self.correct_answers} out of {self.total_questions} questions correctly.")
-        score = (self.correct_answers / self.total_questions) * 100
-        print(f"Your quiz score is: {score}%")
+    # Function of the Hiragana quiz
+    def run_quiz(self, kana_set, label):
+        print(f"Starting {label} quiz...")
         time.sleep(1)
-        print("Thank you for taking the quiz! Goodbye! クイズをしてくれてありがとうございました! さよなら。") 
+        score = 0
+        questions = random.sample(kana_set, 10)
+        for kana, romaji in questions:
+            user_input = input(f"What is the romaji for {kana}? ").strip().lower()
+            if user_input == romaji:
+                score += 1
+                print("Correct! 👍")
+            else:
+                print(f"Oops! The correct answer is {romaji}.")
+                time.sleep(0.5)
+        self.display_score(score, len(questions))
 
-        if score == 0:
+    def display_score(self, correct, total):
+        percent = (correct / total) * 100
+        print(f"\nYou got {correct} out of {total} correct.")
+        print(f"Score: {percent:.1f}%")
+        time.sleep(1) 
+
+        if correct == 0:
+            print("全ての答えが間違っていました。復習してからもう一度挑戦しましょう！")
             print("You did not answer any questions correctly. Please try again after revision.")
-            print("Good luck for next time!")
-            return
+        elif correct < total / 2:
+            print("半分未満正解でした。頑張ってください！")
+            print("You answered less than half of the questions correctly. Keep trying!")
+        elif correct == total / 2:
+            print("よくできました！あと少しで満点です！")
+            print("You answered half of the questions correctly. Good job! Almost there!")
+        elif correct == total:
+            print("満点です！おめでとうございます！")
+            print("Congratulations! You answered all questions correctly!")
 
-        elif score < 50 and score > 0:
-            print("You answered less than half of the questions correctly. Please try again after revision.")
-            print("Good luck for next time!")
-            return
+        print("Thank you for taking the quiz! Goodbye! クイズをしてくれてありがとうございました! さよなら。")
 
-        elif score > 50 and score <= 90:
-            print("You answered more than half of the questions correctly. Good job! よくできました！")
-            print("Keep practicing to get full marks!")
-            return
-
-        elif score == 100:
-            print("Congratulations! You answered all questions correctly.")
-            print("おめでとうございます！ よくできました。")
-
-        QuizScore.display(self)
+# Main function of the program
+def main():
+    # Welcome message & ask for the user's name
+    display_date_time()
+    print("Hello, welcome to the Hiragana & Katakana game.こんにちは、ひらがなとカタカナのゲームへようこそ。")
+    name = input("(お名前は何ですか？)What is your name? ").strip()
+    time.sleep(0.5)
+    print("Hello,", name.title(), ".")
+    print("こんにちは、" + name.title() + "さん。")
+    time.sleep(0.5)
+    
+    
