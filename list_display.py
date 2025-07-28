@@ -1,7 +1,7 @@
 import time
 
 # Hiragana and Katakana lists with romaji
-def kana_list():
+def kana_romanji_list():
     kana_romanji = [
         ("a", "あ", "ア"), ("i", "い", "イ"), ("u", "う", "ウ"), ("e", "え", "エ"), ("o", "お", "オ"),
         ("ka", "か", "カ"), ("ki", "き", "キ"), ("ku", "く", "ク"), ("ke", "け", "ケ"), ("ko", "こ", "コ"),
@@ -32,6 +32,3 @@ def kana_list():
     print("-" * 150)
     for romaji, hira, kata in kana_romanji:
         print(f"{romaji:<50} {hira:<50} {kata:<50}")
-
-if __name__ == "__main__":
-    kana_list() 

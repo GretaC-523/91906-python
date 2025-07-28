@@ -3,7 +3,7 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import simpledialog
-from list import kana_list
+from list_display import kana_romanji_list
 from quiz_score import QuizScore
 
 class KanaQuizGUI:
