@@ -113,5 +113,22 @@ def main():
     print("Hello,", name.title(), ".")
     print("こんにちは、" + name.title() + "さん。")
     time.sleep(0.5)
+
+    # Ask the user if they want to start the quiz or need more time
+    start = input("Do you want to start the quiz now or need some more time? (start/not yet): ").strip().lower()
+    if start == 'start':
+        Kana_quiz().quiz_method()
     
-    
+    elif start == 'not yet':
+        list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
+        
+        if list_choice in ('yes', 'y'):
+            kana_list()
+            print("Good luck with your revision! 復習を頑張ります！")
+        
+        elif list_choice in ('no', 'n'):
+            print("You may start the quiz when you are ready. 準備した後で、クイズを始めることができます。")
+            print("Good luck! 頑張ります！")
+
+if __name__ == "__main__":
+    main()
