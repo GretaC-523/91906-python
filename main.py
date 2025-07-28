@@ -85,7 +85,7 @@ class Kana_quiz:
     def display_score(self, correct, total):
         percent = (correct / total) * 100
         print(f"\nYou got {correct} out of {total} correct.")
-        print(f"Score: {percent:.1f}%")
+        print(f"Score: {percent:.1f}")
         time.sleep(1) 
 
         if correct == 0:
@@ -118,10 +118,10 @@ def main():
     start = input("Do you want to start the quiz now or need some more time? (start/not yet): ").strip().lower()
     if start == 'start':
         Kana_quiz().quiz_choice()
-    
+
     elif start == 'not yet':
         list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
-        
+
         if list_choice in ('yes', 'y'):
             kana_list()
             print("Good luck with your revision! 復習を頑張ります！")
