@@ -1,7 +1,7 @@
 import time
 
 # Hiragana and Katakana lists with romaji
-def kana_romanji_list():
+def kana_list():
     kana_romanji = [
         ("a", "あ", "ア"), ("i", "い", "イ"), ("u", "う", "ウ"), ("e", "え", "エ"), ("o", "お", "オ"),
         ("ka", "か", "カ"), ("ki", "き", "キ"), ("ku", "く", "ク"), ("ke", "け", "ケ"), ("ko", "こ", "コ"),
@@ -26,9 +26,15 @@ def kana_romanji_list():
         ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
     ]
 
-    print("Kana List with romanji:")
-    time.sleep(1)
-    print(f"{'Romaji':<50} {'Hiragana':<50} {'Katakana':<50}")
-    print("-" * 150)
-    for romaji, hira, kata in kana_romanji:
-        print(f"{romaji:<50} {hira:<50} {kata:<50}")
+    hira_list = [(hira, romaji) for romaji, hira, kata in kana_romanji]
+    kata_list = [(kata, romaji) for romaji, hira, kata in kana_romanji]
+    return hira_list, kata_list
+
+# Function to display the Kana lists
+def list_display():
+    hira_list, kata_list = kana_list()
+    print(f"{'Romaji':<10} {'Hiragana':<10} {'Katakana':<10}")
+    print("-" * 30)
+    for hira, romaji in hira_list:
+        kata = next((k for k, r in kata_list if r == romaji), "")
+        print(f"{romaji:<10} {hira:<10} {kata:<10}")

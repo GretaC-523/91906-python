@@ -3,8 +3,8 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import simpledialog
-from list_display import kana_romanji_list
-from quiz_score import QuizScore
+from list_display import kana_list
+from quiz import kana_quiz
 
 class KanaQuizGUI:
     def __init__(self, master):
