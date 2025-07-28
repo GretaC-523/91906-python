@@ -1,6 +1,6 @@
 import time
 import random
-from list import kana_romanji_list
+from list_display import kana_list
 
 # Class function of the Kana quiz
 class Kana_quiz: 
