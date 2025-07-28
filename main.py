@@ -117,7 +117,7 @@ def main():
     # Ask the user if they want to start the quiz or need more time
     start = input("Do you want to start the quiz now or need some more time? (start/not yet): ").strip().lower()
     if start == 'start':
-        Kana_quiz().quiz_method()
+        Kana_quiz().quiz_choice()
     
     elif start == 'not yet':
         list_choice = input("Do you want to see the Kana lists? (yes/no): ").strip().lower()
