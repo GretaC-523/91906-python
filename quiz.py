@@ -36,7 +36,8 @@ class Kana_quiz:
                 print(f"Oops! The correct answer is {romaji}.")
                 time.sleep(0.5)
         self.display_score(score, len(questions))
-
+    
+    # Function to display the user's score
     def display_score(self, correct, total):
         percent = (correct / total) * 100
         print(f"\nYou got {correct} out of {total} correct.")

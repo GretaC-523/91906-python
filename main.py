@@ -82,11 +82,28 @@ class Kana_quiz:
                 time.sleep(0.5)
         self.display_score(score, len(questions))
 
+     # Function of the Hiragana quiz
+    def run_quiz(self, kana_set, label):
+        print(f"Starting {label} quiz...")
+        time.sleep(1)
+        score = 0
+        questions = random.sample(kana_set, 10)
+        for kana, romaji in questions:
+            user_input = input(f"What is the romaji for {kana}? ").strip().lower()
+            if user_input == romaji:
+                score += 1
+                print("Correct! 👍")
+            else:
+                print(f"Oops! The correct answer is {romaji}.")
+                time.sleep(0.5)
+        self.display_score(score, len(questions))
+
+    # Function to display the user's score
     def display_score(self, correct, total):
         percent = (correct / total) * 100
         print(f"\nYou got {correct} out of {total} correct.")
         print(f"Score: {percent:.1f}")
-        time.sleep(1) 
+        time.sleep(1)
 
         if correct == 0:
             print("全ての答えが間違っていました。復習してからもう一度挑戦しましょう！")
