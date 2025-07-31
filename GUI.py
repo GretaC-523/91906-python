@@ -73,7 +73,7 @@ class KanaQuizGUI:
             messagebox.showinfo("Your answer is correct!")
             self.correct += 1
         else:
-            messagebox.showinfo("Your answer is incorrect!", f"It should be '{romaji}'.")
+            messagebox.showinfo("Your answer is incorrect.", f"It should be '{romaji}'.")
             self.incorrect += 1
 
         self.current += 1
@@ -83,7 +83,7 @@ class KanaQuizGUI:
         total = self.correct + self.incorrect
         messagebox.showinfo(
             "This is the end of the quiz.",
-            f"よくできました! You answered {self.correct} out of {total} correctly 🌟"
+            f"よくできました! You have answered {self.correct} out of {total} questions correctly 🌟"
         )
         self.master.destroy()
 
