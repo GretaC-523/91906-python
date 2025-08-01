@@ -88,7 +88,8 @@ class KanaQuizGUI:
             command=self.display_kana_lists
         )
         list_button.pack(pady=5)
-
+     
+    # Function to display the Kana lists in a new window
     def display_kana_lists(self):
         list_window = tk.Toplevel(self.master)
         list_window.title("Kana List")
@@ -103,7 +104,8 @@ class KanaQuizGUI:
         for hira, romaji in self.hiragana:
             kata = next((k for k, r in self.katakana if r == romaji), "")
             text.insert("end", f"{romaji:<10} {hira:<10} {kata:<10}\n")
-
+    
+    # Show quiz options for Hiragana, Katakana, or Both
     def show_quiz_options(self):
         self.welcome_frame.destroy()
 
@@ -116,7 +118,8 @@ class KanaQuizGUI:
         tk.Button(self.option_frame, text="Hiragana ひらがな", command=self.start_hiragana).pack(pady=5)
         tk.Button(self.option_frame, text="Katakana カタカナ", command=self.start_katakana).pack(pady=5)
         tk.Button(self.option_frame, text="Both ひらがな と カタカナ", command=self.start_both).pack(pady=5)
-
+    
+    # Start the quiz with the chosen option
     def start_quiz(self, question_set):
         self.option_frame.destroy()
 
@@ -169,7 +172,7 @@ class KanaQuizGUI:
         messagebox.showinfo("This is the end of the quiz", score_msg)
         self.master.quit()
 
-# ----- Launch GUI -----
+# Launch the GUI application 
 if __name__ == "__main__":
     root = tk.Tk()
     KanaQuizGUI(root)
