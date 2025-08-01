@@ -165,7 +165,7 @@ class KanaQuizGUI:
 
     def show_results(self):
         total = len(self.questions)
-        score_msg = f"あなたのスコア: {self.correct}/{total} Great job!"
+        score_msg = f"You have answeered {self.correct}/{total} questions correctly.\n"
         messagebox.showinfo("This is the end of the quiz", score_msg)
         self.master.quit()
 
