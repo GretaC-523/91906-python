@@ -157,15 +157,15 @@ class KanaQuizGUI:
         answer = self.entry.get().strip().lower()
         if answer == romaji:
             self.correct += 1
-            messagebox.showinfo("Correct!", "ビンゴ！")
+            messagebox.showinfo("Your answer is correct!", "ビンゴ！")
         else:
-            messagebox.showinfo("Incorrect", f"The correct answer is '{romaji}'.")
+            messagebox.showinfo("Your answer is incorrect.", f"It should be '{romaji}'.")
         self.current += 1
         self.next_question()
 
     def show_results(self):
         total = len(self.questions)
-        score_msg = f"You have answeered {self.correct}/{total} questions correctly.\n"
+        score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
         messagebox.showinfo("This is the end of the quiz", score_msg)
         self.master.quit()
 
