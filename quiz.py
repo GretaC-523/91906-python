@@ -1,6 +1,7 @@
 import time
 import random
-from list_display import kana_list
+import tkinter as tk
+from tkinter import messagebox
 
 # Class function of the Kana quiz
 class Kana_quiz: 
