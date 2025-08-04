@@ -1,13 +1,13 @@
-# 🎴 Kana Quiz Project
+# 🎴 Mini Kana Quiz
 
-Welcome to my Kana Quiz — a learning tool designed to help high school students with **Hiragana** and **Katakana** learning/revision through interactive quiz. Whether you're revising or just beginning your journey into Japanese, this quiz provides a gentle and thoughtful learning experience. 
+Welcome to my mini Kana Quiz — a learning tool designed to help high school students with **Hiragana** and **Katakana** learning/revision through interactive quiz. Whether you're revising or just beginning your journey into Japanese, this quiz provides a gentle and thoughtful learning experience. 
 
 ---
 
 ## 🌟 Features
 
 - 🧠 **Kana-to-Romanji quiz** for Hiragana, Katakana, or both
-- 🎛️ **Two interfaces**: CLI (main.py) and GUI (GUI.py using Tkinter)
+- 🎛️ **Single interface**: GUI (main_GUI.py using Tkinter)
 - 🎌 Bilingual questions, instructions and results in: English + Japanese
 - 📜 Kana reference list with romaji
 
@@ -17,10 +17,11 @@ Welcome to my Kana Quiz — a learning tool designed to help high school student
 
 | File              | Description                                                  |
 |-------------------|--------------------------------------------------------------|
-| `main.py`         | Console-based version of the quiz                            |
-| `GUI.py`          | Tkinter-based graphical version                              |
-| `list_display.py` | Shared Kana data: `kana_list()` returns Hiragana and Katakana|
-| `quiz.py`         | The quiz with score tracking logic                           |
+| `main_GUI.py`     | Tkinter-based graphical version of the quiz                  |
+| `list_display.py` | Returns a Hiragana, Katakana & Romanji list                  |
+| `quiz_option.py`  | 3 options allowed: Hiragana, Katakana and both               |
 | `introduction.py` | The introduction component of the program                    |
+| `answer_score.py` | Checks your answers and displays your score                  |
+| `start_quiz.py`   | The Kana quiz function                                       |
 
 ---
