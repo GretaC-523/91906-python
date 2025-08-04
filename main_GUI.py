@@ -112,7 +112,7 @@ class KanaQuizGUI:
         self.option_frame = tk.Frame(self.master)
         self.option_frame.pack(expand=True)
 
-        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Helvetica", 14))
+        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Arial", 14))
         label.pack(pady=10)
 
         tk.Button(self.option_frame, text="Hiragana ひらがな", command=self.start_hiragana).pack(pady=5)
