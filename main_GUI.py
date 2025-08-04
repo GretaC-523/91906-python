@@ -154,7 +154,8 @@ class KanaQuizGUI:
             self.entry.delete(0, tk.END)
         else:
             self.show_results()
-
+     
+    # Check the user's answer
     def check_answer(self):
         kana, romaji = self.questions[self.current]
         answer = self.entry.get().strip().lower()
@@ -165,7 +166,8 @@ class KanaQuizGUI:
             messagebox.showinfo("Your answer is incorrect.", f"It should be '{romaji}'.")
         self.current += 1
         self.next_question()
-
+    
+    # Show the final results(scores) after the quiz ends
     def show_results(self):
         total = len(self.questions)
         score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
