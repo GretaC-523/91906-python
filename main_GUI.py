@@ -122,7 +122,6 @@ class KanaQuizGUI:
     # Start the quiz with the chosen option
     def start_quiz(self, question_set):
         self.option_frame.destroy()
-
         self.questions = random.sample(question_set, 10)
         self.current = 0
         self.correct = 0
@@ -179,3 +178,5 @@ if __name__ == "__main__":
     root = tk.Tk()
     KanaQuizGUI(root)
     root.mainloop()
+
+  
