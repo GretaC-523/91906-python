@@ -55,7 +55,7 @@ class KanaQuizGUI:
         welcome_label = tk.Label(
             self.welcome_frame,
             text="Welcome to the Kana quiz.\nひらがなとカタカナのゲームへようこそ。",
-            font=("Arial", 14),
+            font=("Arial", "Bold", 14),
             fg="#4B0082",
             pady=10
         )
@@ -98,12 +98,12 @@ class KanaQuizGUI:
         text = tk.Text(list_window, wrap="none", font=("Consolas", 12))
         text.pack(expand=True, fill="both")
 
-        text.insert("end", f"{'Romaji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
+        text.insert("end", f"{'Romanji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
         text.insert("end", "-" * 30 + "\n")
 
-        for hira, romaji in self.hiragana:
-            kata = next((k for k, r in self.katakana if r == romaji), "")
-            text.insert("end", f"{romaji:<10} {hira:<10} {kata:<10}\n")
+        for hira, romanji in self.hiragana:
+            kata = next((k for k, r in self.katakana if r == romanji), "")
+            text.insert("end", f"{romanji:<10} {hira:<10} {kata:<10}\n")
     
     # Show quiz options for Hiragana, Katakana, or Both
     def show_quiz_options(self):
@@ -156,13 +156,13 @@ class KanaQuizGUI:
      
     # Check the user's answer
     def check_answer(self):
-        kana, romaji = self.questions[self.current]
+        kana, romanji = self.questions[self.current]
         answer = self.entry.get().strip().lower()
-        if answer == romaji:
+        if answer == romanji:
             self.correct += 1
             messagebox.showinfo("Your answer is correct!", "ビンゴ！")
         else:
-            messagebox.showinfo("Your answer is incorrect.", f"It should be '{romaji}'.")
+            messagebox.showinfo("Your answer is incorrect.", f"It should be '{romanji}'.")
         self.current += 1
         self.next_question()
     
