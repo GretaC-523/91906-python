@@ -28,3 +28,19 @@ def kana_list():
     hiragana = [(hira, romaji) for romaji, hira, kata in kana_romanji]
     katakana = [(kata, romaji) for romaji, hira, kata in kana_romanji]
     return hiragana, katakana
+
+# Function to display the Kana lists in a new window
+    def display_kana_lists(self):
+        list_window = tk.Toplevel(self.master)
+        list_window.title("Kana List")
+        list_window.geometry("400x500")
+
+        text = tk.Text(list_window, wrap="none", font=("Comic Sans MS", 12))
+        text.pack(expand=True, fill="both")
+
+        text.insert("end", f"{'Romanji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
+        text.insert("end", "-" * 30 + "\n")
+
+        for hira, romanji in self.hiragana:
+            kata = next((k for k, r in self.katakana if r == romanji), "")
+            text.insert("end", f"{romanji:<10} {hira:<10} {kata:<10}\n")

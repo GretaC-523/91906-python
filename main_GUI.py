@@ -7,29 +7,19 @@ import time
 
 # Kana List display function
 def kana_list():
-    kana_romanji = [
-        ("a", "あ", "ア"), ("i", "い", "イ"), ("u", "う", "ウ"), ("e", "え", "エ"), ("o", "お", "オ"),
-        ("ka", "か", "カ"), ("ki", "き", "キ"), ("ku", "く", "ク"), ("ke", "け", "ケ"), ("ko", "こ", "コ"),
-        ("sa", "さ", "サ"), ("shi", "し", "シ"), ("su", "す", "ス"), ("se", "せ", "セ"), ("so", "そ", "ソ"),
-        ("ta", "た", "タ"), ("chi", "ち", "チ"), ("tsu", "つ", "ツ"), ("te", "て", "テ"), ("to", "と", "ト"),
-        ("na", "な", "ナ"), ("ni", "に", "ニ"), ("nu", "ぬ", "ヌ"), ("ne", "ね", "ネ"), ("no", "の", "ノ"),
-        ("ha", "は", "ハ"), ("hi", "ひ", "ヒ"), ("fu", "ふ", "フ"), ("he", "へ", "ヘ"), ("ho", "ほ", "ホ"),
-        ("ma", "ま", "マ"), ("mi", "み", "ミ"), ("mu", "む", "ム"), ("me", "め", "メ"), ("mo", "も", "モ"),
-        ("ya", "や", "ヤ"), ("yu", "ゆ", "ユ"), ("yo", "よ", "ヨ"),
-        ("ra", "ら", "ラ"), ("ri", "り", "リ"), ("ru", "る", "ル"), ("re", "れ", "レ"), ("ro", "ろ", "ロ"),
-        ("wa", "わ", "ワ"), ("wo", "を", "ヲ"), ("n", "ん", "ン"),
-        ("kya", "きゃ", "キャ"), ("kyu", "きゅ", "キュ"), ("kyo", "きょ", "キョ"),
-        ("sha", "しゃ", "シャ"), ("shu", "しゅ", "シュ"), ("sho", "しょ", "ショ"),
-        ("cha", "ちゃ", "チャ"), ("chu", "ちゅ", "チュ"), ("cho", "ちょ", "チョ"),
-        ("nya", "にゃ", "ニャ"), ("nyu", "にゅ", "ニュ"), ("nyo", "にょ", "ニョ"),
-        ("hya", "ひゃ", "ヒャ"), ("hyu", "ひゅ", "ヒュ"), ("hyo", "ひょ", "ヒョ"),
-        ("mya", "みゃ", "ミャ"), ("myu", "みゅ", "ミュ"), ("myo", "みょ", "ミョ"),
-        ("rya", "りゃ", "リャ"), ("ryu", "りゅ", "リュ"), ("ryo", "りょ", "リョ"),
-        ("gya", "ぎゃ", "ギャ"), ("gyu", "ぎゅ", "ギュ"), ("gyo", "ぎょ", "ギョ"),
-        ("ja", "じゃ", "ジャ"), ("ju", "じゅ", "ジュ"), ("jo", "じょ", "ジョ"),
-        ("bya", "びゃ", "ビャ"), ("byu", "びゅ", "ビュ"), ("byo", "びょ", "ビョ"),
-        ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
-    ]
+    kana_romanji = { "Vowels": [("a", "あ", "ア"), ("i", "い", "イ"), ("u", "う", "ウ"), ("e", "え", "エ"), ("o", "お", "オ")],
+        "K-row": [("ka", "か", "カ"), ("ki", "き", "キ"), ("ku", "く", "ク"), ("ke", "け", "ケ"), ("ko", "こ", "コ")],
+        "S-row": [("sa", "さ", "サ"), ("shi", "し", "シ"), ("su", "す", "ス"), ("se", "せ", "セ"), ("so", "そ", "ソ")],
+        "T-row": [("ta", "た", "タ"), ("chi", "ち", "チ"), ("tsu", "つ", "ツ"), ("te", "て", "テ"), ("to", "と", "ト")],
+        "N-row": [("na", "な", "ナ"), ("ni", "に", "ニ"), ("nu", "ぬ", "ヌ"), ("ne", "ね", "ネ"), ("no", "の", "ノ")],
+        "H-row": [("ha", "は", "ハ"), ("hi", "ひ", "ヒ"), ("fu", "ふ", "フ"), ("he", "へ", "ヘ"), ("ho", "ほ", "ホ")],
+        "M-row": [("ma", "ま", "マ"), ("mi", "み", "ミ"), ("mu", "む", "ム"), ("me", "め", "メ"), ("mo", "も", "モ")],
+        "Y-row": [("ya", "や", "ヤ"), ("", "", ""), ("yu", "ゆ", "ユ"), ("", "", ""), ("yo", "よ", "ヨ")],
+        "R-row": [("ra", "ら", "ラ"), ("ri", "り", "リ"), ("ru", "る", "ル"), ("re", "れ", "レ"), ("ro", "ろ", "ロ")],
+        "W-row": [("wa", "わ", "ワ"), ("", "", ""), ("", "", ""), ("", "", ""), ("wo", "を", "ヲ")],
+        "N": [("n", "ん", "ン")] 
+     }
+
     hiragana = [(hira, romanji) for romanji, hira, kata in kana_romanji]
     katakana = [(kata, romanji) for romanji, hira, kata in kana_romanji]
     return hiragana, katakana
@@ -55,7 +45,7 @@ class KanaQuizGUI:
         welcome_label = tk.Label(
             self.welcome_frame,
             text="Welcome to the Kana quiz.\nひらがなとカタカナのゲームへようこそ。",
-            font=("Comic Sans MS", 14, "bold"),
+            font=("Meiryo", 14, "bold"),
             fg="#4B0082",
             pady=10
         )
@@ -65,7 +55,7 @@ class KanaQuizGUI:
         date_time_label = tk.Label(
             self.welcome_frame,
             text=now.strftime("The current date & time is / 今の日付と時刻は: %A, %d %B %Y\n⏰%I:%M %p"),
-            font=("Comic Sans MS", 10),
+            font=("Meiryo", 10),
             fg="#555555",
             pady=10
         )
@@ -74,7 +64,7 @@ class KanaQuizGUI:
         start_button = tk.Button(
             self.welcome_frame,
             text="Start Quiz",
-            font=("Verdana", 14),
+            font=("Trebuchet MS", 14),
             bg="#90EE90",
             command=self.show_quiz_options
         )
@@ -83,7 +73,7 @@ class KanaQuizGUI:
         list_button = tk.Button(
             self.welcome_frame,
             text="View Kana List",
-            font=("Verdana", 12),
+            font=("Trebuchet MS", 12),
             bg="#ADD8E6",
             command=self.display_kana_lists
         )
@@ -112,13 +102,21 @@ class KanaQuizGUI:
         self.option_frame = tk.Frame(self.master)
         self.option_frame.pack(expand=True)
 
-        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Helvetica", 14))
+        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Courier New", 14))
         label.pack(pady=10)
 
-        tk.Button(self.option_frame, text="Hiragana ひらがな", command=self.start_hiragana).pack(pady=5)
-        tk.Button(self.option_frame, text="Katakana カタカナ", command=self.start_katakana).pack(pady=5)
-        tk.Button(self.option_frame, text="Both ひらがな と カタカナ", command=self.start_both).pack(pady=5)
-    
+        tk.Button(self.option_frame, text="Hiragana ひらがな",
+          command=self.start_hiragana,
+          bg="#ff94ed", font=("Trebuchet MS", 14, "bold")).pack(pady=5)
+
+        tk.Button(self.option_frame, text="Katakana カタカナ",
+          command=self.start_katakana,
+          bg="#FF94ed", font=("Trebuchet MS", 14, "bold")).pack(pady=5)
+
+        tk.Button(self.option_frame, text="Both ひらがな と カタカナ",
+          command=self.start_both,
+          bg="#FF94ed", font=("Trebuchet MS", 14, "bold")).pack(pady=5)
+
     # Start the quiz with the chosen option
     def start_quiz(self, question_set):
         self.option_frame.destroy()
@@ -126,14 +124,14 @@ class KanaQuizGUI:
         self.current = 0
         self.correct = 0
 
-        self.quiz_label = tk.Label(self.master, text="", font=("Arial", 24))
+        self.quiz_label = tk.Label(self.master, text="", font=("Courier New", 24))
         self.quiz_label.pack(pady=20)
 
-        self.entry = tk.Entry(self.master, font=("Arial", 14))
+        self.entry = tk.Entry(self.master, font=("Courier New", 14))
         self.entry.pack()
 
         self.submit_btn = tk.Button(self.master, text="Submit", command=self.check_answer)
-        self.submit_btn.config(font=("Verdana", 12), bg="#A7A8FF", fg="#000000")
+        self.submit_btn.config(font=("Trebuchet MS", 12), bg="#A7A8FF", fg="#000000")
         self.submit_btn.pack(pady=10)
 
         self.next_question()
@@ -151,6 +149,7 @@ class KanaQuizGUI:
         if self.current < len(self.questions):
             kana, _ = self.questions[self.current]
             self.quiz_label.config(text=kana)
+            self.quiz_label.configure(fg="Meiryo", bg="#F0F8FF")
             self.entry.delete(0, tk.END)
         else:
             self.show_results()
@@ -158,7 +157,7 @@ class KanaQuizGUI:
     def check_answer(self):
      kana, romanji = self.questions[self.current]
      answer = self.entry.get().strip().lower()
-     messagebox.configure(fg="Arial")
+     messagebox.configure(fg="Meiryo", bg="#F0F8FF")
 
      if len(answer) < 2:
          messagebox.showwarning("Input Too Short", "Please enter at least 2 English letters.")
@@ -180,7 +179,9 @@ class KanaQuizGUI:
     def show_results(self):
         total = len(self.questions)
         score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
+        score_msg.configure(fg="Courier New", bg="#F0F8FF")
         messagebox.showinfo("This is the end of the quiz", score_msg)
+        messagebox.configure(fg="Courier New", bg="#F0F8FF")
         self.master.quit()
 
 # Launch the GUI application 
