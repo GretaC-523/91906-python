@@ -30,16 +30,16 @@ def kana_list():
         ("bya", "びゃ", "ビャ"), ("byu", "びゅ", "ビュ"), ("byo", "びょ", "ビョ"),
         ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
     ]
-    hiragana = [(hira, romaji) for romaji, hira, kata in kana_romanji]
-    katakana = [(kata, romaji) for romaji, hira, kata in kana_romanji]
+    hiragana = [(hira, romanji) for romanji, hira, kata in kana_romanji]
+    katakana = [(kata, romanji) for romanji, hira, kata in kana_romanji]
     return hiragana, katakana
 
 # GUI Quiz Class function
 class KanaQuizGUI:
     def __init__(self, master):
         self.master = master
-        master.title("Kana Quiz 🌸")
-        master.geometry("500x400")
+        self.master.title("Kana Quiz 🌸")
+        self.master.geometry("500x400")
 
         self.hiragana, self.katakana = kana_list()
         self.questions = []
@@ -55,7 +55,7 @@ class KanaQuizGUI:
         welcome_label = tk.Label(
             self.welcome_frame,
             text="Welcome to the Kana quiz.\nひらがなとカタカナのゲームへようこそ。",
-            font=("Arial", "Bold", 14),
+            font=("Comic Sans MS", 14, "bold"),
             fg="#4B0082",
             pady=10
         )
@@ -65,7 +65,7 @@ class KanaQuizGUI:
         date_time_label = tk.Label(
             self.welcome_frame,
             text=now.strftime("The current date & time is / 今の日付と時刻は: %A, %d %B %Y\n⏰%I:%M %p"),
-            font=("Arial", 12),
+            font=("Comic Sans MS", 10),
             fg="#555555",
             pady=10
         )
@@ -74,7 +74,7 @@ class KanaQuizGUI:
         start_button = tk.Button(
             self.welcome_frame,
             text="Start Quiz",
-            font=("Arial", 14),
+            font=("Verdana", 14),
             bg="#90EE90",
             command=self.show_quiz_options
         )
@@ -83,7 +83,7 @@ class KanaQuizGUI:
         list_button = tk.Button(
             self.welcome_frame,
             text="View Kana List",
-            font=("Arial", 12),
+            font=("Verdana", 12),
             bg="#ADD8E6",
             command=self.display_kana_lists
         )
@@ -95,7 +95,7 @@ class KanaQuizGUI:
         list_window.title("Kana List")
         list_window.geometry("400x500")
 
-        text = tk.Text(list_window, wrap="none", font=("Consolas", 12))
+        text = tk.Text(list_window, wrap="none", font=("Comic Sans MS", 12))
         text.pack(expand=True, fill="both")
 
         text.insert("end", f"{'Romanji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
@@ -112,7 +112,7 @@ class KanaQuizGUI:
         self.option_frame = tk.Frame(self.master)
         self.option_frame.pack(expand=True)
 
-        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Arial", 14))
+        label = tk.Label(self.option_frame, text="Choose quiz type: ", font=("Helvetica", 14))
         label.pack(pady=10)
 
         tk.Button(self.option_frame, text="Hiragana ひらがな", command=self.start_hiragana).pack(pady=5)
@@ -155,7 +155,6 @@ class KanaQuizGUI:
         else:
             self.show_results()
      
-    # Check the user's answer
     def check_answer(self):
      kana, romanji = self.questions[self.current]
      answer = self.entry.get().strip().lower()
@@ -189,5 +188,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     KanaQuizGUI(root)
     root.mainloop()
-
-  
