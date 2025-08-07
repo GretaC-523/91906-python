@@ -133,6 +133,7 @@ class KanaQuizGUI:
         self.entry.pack()
 
         self.submit_btn = tk.Button(self.master, text="Submit", command=self.check_answer)
+        self.submit_btn.config(font=("Verdana", 12), bg="#A7A8FF", fg="#000000")
         self.submit_btn.pack(pady=10)
 
         self.next_question()
@@ -156,15 +157,25 @@ class KanaQuizGUI:
      
     # Check the user's answer
     def check_answer(self):
-        kana, romanji = self.questions[self.current]
-        answer = self.entry.get().strip().lower()
-        if answer == romanji:
-            self.correct += 1
-            messagebox.showinfo("Your answer is correct!", "ビンゴ！")
-        else:
-            messagebox.showinfo("Your answer is incorrect.", f"It should be '{romanji}'.")
-        self.current += 1
-        self.next_question()
+     kana, romanji = self.questions[self.current]
+     answer = self.entry.get().strip().lower()
+     messagebox.configure(fg="Arial")
+
+     if len(answer) < 2:
+         messagebox.showwarning("Input Too Short", "Please enter at least 2 English letters.")
+         return
+     elif len(answer) > 3:
+         messagebox.showwarning("Input Too Long", "Please enter no more than 3 English letters.")
+         return
+
+     if answer == romanji:
+         self.correct += 1
+         messagebox.showinfo("Your answer is correct!", "ビンゴ！")
+     else:
+         messagebox.showinfo("Your answer is incorrect.", f"It should be '{romanji}'.")
+
+     self.current += 1
+     self.next_question()
     
     # Show the final results(scores) after the quiz ends
     def show_results(self):
