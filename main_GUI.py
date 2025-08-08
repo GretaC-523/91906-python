@@ -165,22 +165,13 @@ class KanaQuizGUI:
             self.show_results()
      
     def check_answer(self):
-     kana, romanji = self.questions[self.current]
-     answer = self.entry.get().strip().lower()
-     messagebox.configure(fg="Meiryo", bg="#F0F8FF")
-
-     if len(answer) < 2:
-         messagebox.showwarning("Input Too Short", "Please enter at least 2 English letters.")
-         return
-     elif len(answer) > 3:
-         messagebox.showwarning("Input Too Long", "Please enter no more than 3 English letters.")
-         return
-
-     if answer == romanji:
-         self.correct += 1
-         messagebox.showinfo("Your answer is correct!", "ビンゴ！")
+     user_input = self.entry.get().strip().lower()
+     if not (2 <= len(user_input) <= 3):
+            self.feedback_label.config(text="Please enter 2-3 characters.", fg=self.colors['warning'])
+     elif user_input == self.correct_answer:
+            self.feedback_label.config(text="Correct! 正解です！", fg=self.colors['correct'])
      else:
-         messagebox.showinfo("Your answer is incorrect.", f"It should be '{romanji}'.")
+            self.feedback_label.config(text=f"Incorrect. The answer is '{self.correct_answer}' .", fg=self.colors['incorrect'])
 
      self.current += 1
      self.next_question()
