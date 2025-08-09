@@ -5,6 +5,7 @@ from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox
 
+# Check and display the answer messages
 def check_answer(self):
     kana, romaji = self.questions[self.current]
     answer = self.entry.get().strip().lower()
@@ -18,15 +19,21 @@ def check_answer(self):
 
     if answer == romaji:
         self.correct += 1
-        messagebox.showinfo("Your answer is correct!", "ビンゴ！")
+        messagebox.showinfo("Correct! 正解です！")
+    elif answer != romaji:
+        messagebox.showinfo(text=f"Incorrect. The answer is '{self.correct_answer}' .", fg=self.colors['incorrect'])
     else:
-        messagebox.showinfo("Your answer is incorrect.", f"It should be '{romaji}'.")
+        messagebox.showwarning("Invalid input. Please only enter romaji.")
+        return
 
     self.current += 1
     self.next_question()
 
+# Show the final results(scores) after the quiz ends
 def show_results(self):
- total = len(self.questions)
- score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
- messagebox.showinfo("This is the end of the quiz", score_msg)
- self.master.quit()
+  total = len(self.questions)
+  score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
+  score_msg.configure(fg="Courier New", bg="#F0F8FF")
+  messagebox.showinfo("This is the end of the quiz. Good bye!", score_msg) 
+  messagebox.configure(fg="Courier New", bg="#F0F8FF")
+  self.master.quit()

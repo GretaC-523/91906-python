@@ -7,7 +7,7 @@ import time
 
 # Kana List display function
 def kana_list():
-    kana_romanji = [
+    kana_romaji = [
         ("a", "あ", "ア"), ("i", "い", "イ"), ("u", "う", "ウ"), ("e", "え", "エ"), ("o", "お", "オ"),
         ("ka", "か", "カ"), ("ki", "き", "キ"), ("ku", "く", "ク"), ("ke", "け", "ケ"), ("ko", "こ", "コ"),
         ("sa", "さ", "サ"), ("shi", "し", "シ"), ("su", "す", "ス"), ("se", "せ", "セ"), ("so", "そ", "ソ"),
@@ -30,8 +30,8 @@ def kana_list():
         ("bya", "びゃ", "ビャ"), ("byu", "びゅ", "ビュ"), ("byo", "びょ", "ビョ"),
         ("pya", "ぴゃ", "ピャ"), ("pyu", "ぴゅ", "ピュ"), ("pyo", "ぴょ", "ピョ")
     ]
-    hiragana = [(hira, romaji) for romaji, hira, kata in kana_romanji]
-    katakana = [(kata, romaji) for romaji, hira, kata in kana_romanji]
+    hiragana = [(hira, romaji) for romaji, hira, kata in kana_romaji]
+    katakana = [(kata, romaji) for romaji, hira, kata in kana_romaji]
     return hiragana, katakana
 
 # GUI Quiz Class function
@@ -91,20 +91,40 @@ class KanaQuizGUI:
      
     # Function to display the Kana lists in a new window
     def display_kana_lists(self):
-        list_window = tk.Toplevel(self.master)
-        list_window.title("Kana List")
-        list_window.geometry("400x500")
+      list_window = tk.Toplevel(self.master)
+      list_window.title("Kana List")
+      list_window.configure(bg="#ffffff")  # Light mode
 
-        text = tk.Text(list_window, wrap="none", font=("Comic Sans MS", 12))
-        text.pack(expand=True, fill="both")
+      # Title
+      title = tk.Label(list_window, text="Kana List", font=("Comic Sans MS", 16, "bold"),
+                     fg="black")
+      title.pack(pady=10)
 
-        text.insert("end", f"{'Romanji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
-        text.insert("end", "-" * 30 + "\n")
+      # Grid frame
+      grid_frame = tk.Frame(list_window, bg="#ffffff")
+      grid_frame.pack(padx=20, pady=10)
 
-        for hira, romanji in self.hiragana:
-            kata = next((k for k, r in self.katakana if r == romanji), "")
-            text.insert("end", f"{romanji:<10} {hira:<10} {kata:<10}\n")
-    
+      # Header row
+      headers = ["Romaji", "Hiragana", "Katakana"]
+      for col, text in enumerate(headers):
+          tk.Label(grid_frame, text=text, font=("Trebuchet MS", 14, "bold"),
+                 fg="#ff49ed", padx=10).grid(row=0, column=col)
+
+      # Populate grid
+      for row, (hira, romanji) in enumerate(self.hiragana, start=1):
+          kata = next((k for k, r in self.katakana if r == romanji), "")
+          tk.Label(grid_frame, text=romanji, font=("Trebuchet MS", 12),
+                 fg="black", padx=10).grid(row=row, column=0)
+          tk.Label(grid_frame, text=hira, font=("Trebuchet MS", 12),
+                 fg="black", padx=10).grid(row=row, column=1)
+          tk.Label(grid_frame, text=kata, font=("Trebuchet MS", 12),
+                 fg="black", padx=10).grid(row=row, column=2)
+
+      # Back button
+      back_btn = tk.Button(list_window, text="Back", font=("Trebuchet ms", 12),
+                 bg="#ffffff", fg="black", command=list_window.destroy)
+      back_btn.pack(pady=10)
+
     # Show quiz options for Hiragana, Katakana, or Both
     def show_quiz_options(self):
         self.welcome_frame.destroy()
@@ -159,29 +179,41 @@ class KanaQuizGUI:
         if self.current < len(self.questions):
             kana, _ = self.questions[self.current]
             self.quiz_label.config(text=kana)
-            self.quiz_label.configure(fg="Meiryo", bg="#F0F8FF")
+            self.quiz_label.configure(font=("Meiryo", 12), bg="#F0F8FF")
             self.entry.delete(0, tk.END)
         else:
             self.show_results()
-     
-    def check_answer(self):
-     user_input = self.entry.get().strip().lower()
-     if not (2 <= len(user_input) <= 3):
-            self.feedback_label.config(text="Please enter 2-3 characters.", fg=self.colors['warning'])
-     elif user_input == self.correct_answer:
-            self.feedback_label.config(text="Correct! 正解です！", fg=self.colors['correct'])
-     else:
-            self.feedback_label.config(text=f"Incorrect. The answer is '{self.correct_answer}' .", fg=self.colors['incorrect'])
 
-     self.current += 1
-     self.next_question()
-    
+    # Check and display the answer messages
+    def check_answer(self):
+      kana, romaji = self.questions[self.current]
+      answer = self.entry.get().strip().lower()
+
+      if len(answer) < 2:
+          messagebox.showwarning("Input Too Short", "Please enter at least 2 English letters.")
+          return
+      elif len(answer) > 3:
+          messagebox.showwarning("Input Too Long", "Please enter no more than 3 English letters.")
+          return
+
+      if answer == romaji:
+        self.correct += 1
+        messagebox.showinfo("Correct! 正解です！")
+      elif answer != romaji:
+          messagebox.showinfo(text=f"Incorrect. The answer is '{self.questions[self.current][1]}' .", fg=self.colors['incorrect'])
+      else:
+          messagebox.showwarning("Invalid input. Please only enter romaji.")
+          return
+
+      self.current += 1
+      self.next_question()
+
     # Show the final results(scores) after the quiz ends
     def show_results(self):
         total = len(self.questions)
         score_msg = f"You have answered {self.correct} out of {total} questions correctly.\n"
         score_msg.configure(fg="Courier New", bg="#F0F8FF")
-        messagebox.showinfo("This is the end of the quiz", score_msg)
+        messagebox.showinfo("This is the end of the quiz. Good bye!", score_msg)
         messagebox.configure(fg="Courier New", bg="#F0F8FF")
         self.master.quit()
 

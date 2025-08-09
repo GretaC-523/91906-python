@@ -1,4 +1,4 @@
-import time
+import tkinter as tk
 
 # Kana List display function
 def kana_list():
@@ -30,17 +30,41 @@ def kana_list():
     return hiragana, katakana
 
 # Function to display the Kana lists in a new window
-    def display_kana_lists(self):
-        list_window = tk.Toplevel(self.master)
-        list_window.title("Kana List")
-        list_window.geometry("400x500")
+def display_kana_lists(self):
+    list_window = tk.Toplevel(self.master)
+    list_window.title("Kana List")
+    list_window.configure(bg="#1e1e1e")
 
-        text = tk.Text(list_window, wrap="none", font=("Comic Sans MS", 12))
-        text.pack(expand=True, fill="both")
+    title = tk.Label(list_window, text="Kana List", font=("Comic Sans MS", 16, "bold"),
+                     fg="white", bg="#1e1e1e")
+    title.pack(pady=10)
 
-        text.insert("end", f"{'Romanji':<10} {'Hiragana':<10} {'Katakana':<10}\n")
-        text.insert("end", "-" * 30 + "\n")
+    # Create a grid frame
+    grid_frame = tk.Frame(list_window, bg="#1e1e1e")
+    grid_frame.pack(padx=20, pady=10)
 
-        for hira, romanji in self.hiragana:
-            kata = next((k for k, r in self.katakana if r == romanji), "")
-            text.insert("end", f"{romanji:<10} {hira:<10} {kata:<10}\n")
+    # Header row
+    headers = ["Romaji", "Hiragana", "Katakana"]
+    for col, text in enumerate(headers):
+        tk.Label(grid_frame, text=text, font=("Comic Sans MS", 14, "bold"),
+                 fg="#00ffff", bg="#1e1e1e", padx=10).grid(row=0, column=col)
+
+    # Combine hiragana and katakana lists
+    full_list = []
+    for hira, romanji in self.hiragana:
+        kata = next((k for k, r in self.katakana if r == romanji), "")
+        full_list.append((romanji, hira, kata))
+
+    # Display all kana in grid
+    for row, (romanji, hira, kata) in enumerate(full_list, start=1):
+        tk.Label(grid_frame, text=romanji, font=("Comic Sans MS", 12),
+                 fg="white", bg="#1e1e1e", padx=10).grid(row=row, column=0)
+        tk.Label(grid_frame, text=hira, font=("Comic Sans MS", 12),
+                 fg="white", bg="#1e1e1e", padx=10).grid(row=row, column=1)
+        tk.Label(grid_frame, text=kata, font=("Comic Sans MS", 12),
+                 fg="white", bg="#1e1e1e", padx=10).grid(row=row, column=2)
+
+    # Back button
+    back_btn = tk.Button(list_window, text="Back", font=("Comic Sans MS", 12),
+                         bg="#444", fg="white", command=list_window.destroy)
+    back_btn.pack(pady=10)
